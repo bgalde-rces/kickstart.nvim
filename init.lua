@@ -175,7 +175,11 @@ vim.opt.termguicolors = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
+-- Insert timestamp at the beginning of a line
+vim.keymap.set({ 'n', 'i' }, '<C-t>', function()
+  local timestamp = os.date '%Y-%m-%d %H:%M:%S'
+  vim.api.nvim_command('normal! I' .. timestamp .. ' -- ')
+end, { desc = 'Insert timestamp in insert mode' })
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
